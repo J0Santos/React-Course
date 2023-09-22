@@ -150,7 +150,8 @@ const book = getBook(2);
 // const title = book.title;
 // const author = book.author;
 
-const {title, author, pages, publicationDate, genres, hasMovieAdaptation} = book;
+const { title, author, pages, publicationDate, genres, hasMovieAdaptation } =
+  book;
 console.log(author, title, genres);
 
 // const primaryGenre = genres[0];
@@ -160,21 +161,30 @@ const [primaryGenre, secondaryGenre, ...otherGenres] = genres;
 
 console.log(primaryGenre, secondaryGenre, otherGenres);
 
-const newGenres = [...genres, 'epic fantasy'];
+const newGenres = [...genres, "epic fantasy"];
 newGenres;
 
 const updatedBook = {
-	...book,
-	//Adding a new property 
-	moviePublicationDate: "2021-12-19",
-	//Updating and overwriting  existing property 
-	// pages: 1210
+  ...book,
+  //Adding a new property
+  moviePublicationDate: "2021-12-19",
+  //Updating and overwriting  existing property
+  // pages: 1210
 };
 updatedBook;
 
-const summary = `${title} is a book with ${pages} pages. It was written by ${author} and published in ${publicationDate.split("-")[0]}. The book has${hasMovieAdaptation ? "" : " not"} been adapted to a movie.`;
+// function getYear(str) {
+//   return str.split("-")[0];
+// }
+
+const getYear = (str) => str.split("-")[0];
+console.log(getYear(publicationDate));
+
+const summary = `${title} is a book with ${pages} pages. It was written by ${author} and published in ${getYear(publicationDate)}. The book has${hasMovieAdaptation ? "" : " not"} been adapted to a movie.`;
 summary;
 
 const pagesRange = pages > 1000 ? "over 1000" : "under 1000";
 pagesRange;
 console.log(`The book has ${pagesRange} pages`);
+
+
