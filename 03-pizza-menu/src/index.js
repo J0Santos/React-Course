@@ -69,15 +69,23 @@ function Header() {
 }
 
 function Menu() {
+  const pizzas = pizzaData;
+  // const pizzas = [];
+  const numPizzas = pizzas.length;
+
   return (
     <main className="menu">
       <h2>Our Menu</h2>
 
-      <ul className="pizzas">
-        {pizzaData.map((pizza) => (
-          <Pizza pizzaObj={pizza} key={pizza.name} />
-        ))}
-      </ul>
+      {numPizzas > 0 ? (
+        <ul className="pizzas">
+          {pizzaData.map((pizza) => (
+            <Pizza pizzaObj={pizza} key={pizza.name} />
+          ))}
+        </ul>
+      ) : (
+        <p>We are still working on our menu. Apologies for the inconvenience</p>
+      )}
 
       {/* <Pizza
         name="Pizza Spinaci"
@@ -95,15 +103,18 @@ function Menu() {
   );
 }
 
-function Pizza(props) {
-  console.log(props);
+function Pizza({ pizzaObj }) {
+  console.log(pizzaObj);
+  if (pizzaObj.soldOut) {
+    return null;
+  }
   return (
     <li className="pizza">
-      <img src={props.pizzaObj.photoName} alt={props.pizzaObj.name}></img>
+      <img src={pizzaObj.photoName} alt={pizzaObj.name}></img>
       <div>
-        <h3>{props.pizzaObj.name}</h3>
-        <p>{props.pizzaObj.ingredients}</p>
-        <span>{props.pizzaObj.price}</span>
+        <h3>{pizzaObj.name}</h3>
+        <p>{pizzaObj.ingredients}</p>
+        <span>{pizzaObj.price}</span>
       </div>
     </li>
   );
@@ -122,12 +133,35 @@ function Footer() {
   // 	alert('We are closed');
   // }
 
+  // if (!isOpen) {
+  // 	return <p>We are currently closed, but we would be happy to welcome you between {openHour}:00 and {closeHour}:00.</p>;
+  // }
+
   return (
     <footer className="footer">
-      {new Date().toLocaleTimeString()}. We're currently open
+      {isOpen ? (
+        <Order close={closeHour} open={openHour} />
+      ) : (
+        <p>
+          We are currently closed, but we would be happy to welcome you between{" "}
+          {openHour}:00 and {closeHour}:00.
+        </p>
+      )}
     </footer>
   );
   // return React.createElement('footer', null, '© 2021 Fast React Pizza Company')
+}
+
+function Order({ close, open }) {
+  return (
+    <div className="order">
+      <p>
+        We're open from {open}:00 until {close}:00. Como visit us or order
+        online.
+      </p>
+      <button className="btn">Order</button>
+    </div>
+  );
 }
 
 // React v18
