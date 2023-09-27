@@ -70,9 +70,13 @@ function Intro() {
 function SkillList() {
   return (
     <div className="skill-list">
-        {skills.map((skill) => (
-          <Skill name={skill.skill} color={skill.color} level={skill.level}></Skill>
-        ))}
+      {skills.map((skill) => (
+        <Skill
+          name={skill.skill}
+          color={skill.color}
+          level={skill.level}
+        ></Skill>
+      ))}
       {/* <Skill name="HTML" emoji="😀" color="#BB3022" />
       <Skill name="CSS" emoji="😁" color="#BB7522" />
       <Skill name="JavaScript" emoji="😂" color="#B6BB22" />
@@ -86,11 +90,16 @@ function SkillList() {
   );
 }
 
-function Skill(skill) {
+function Skill({ name, color, level }) {
   return (
-    <div className="skill" style={{ backgroundColor: skill.color }}>
-      <span>{skill.name}</span>
-      <span>{skill.level === "advanced" ? "💪" : (skill.level === "intermediate" ? "👍" : "👶")}</span>
+    <div className="skill" style={{ backgroundColor: color }}>
+      <span>{name}</span>
+      {/* <span>{level === "advanced" ? "💪" : (level === "intermediate" ? "👍" : "👶")}</span> */}
+      <span>
+        {level === "begginer" && "👶"}
+        {level === "intermediate" && "👍"}
+        {level === "advanced" && "💪"}
+      </span>
     </div>
   );
 }
