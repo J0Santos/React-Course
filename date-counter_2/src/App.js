@@ -65,12 +65,16 @@ function Counter() {
           value={step}
           onChange={(e) => setStep(Number(e.target.value))}
         ></input>
-        <span>{step}</span>
+        <span>Step: {step}</span>
       </div>
 
       <div>
         <button onClick={handleCountMinus}>-</button>
-        <input type="numeric" value={count} onChange={(e) => setCount(Number(e.target.value))}></input>
+        <input
+          type="numeric"
+          value={count}
+          onChange={(e) => setCount(Number(e.target.value))}
+        ></input>
         <button onClick={handleCountPlus}>+</button>
       </div>
       <p>
@@ -89,9 +93,9 @@ function Counter() {
           year: "numeric",
         })}
       </p>
-      {(step !== 1 || count !== 0) && (
-        <button onClick={() => handleReset()}>Reset</button>
-      )}
+        {(step !== 1 || count !== 0) && (
+          <button onClick={handleReset}>Reset</button>
+        )}
     </div>
   );
 }
